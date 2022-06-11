@@ -1,0 +1,41 @@
+.initialsDiv {
+    height: 40px;
+    width: 40px;
+    background: grey;
+    border-radius: 25px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    margin-left: 10px;
+}
+
+.both {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 56px;
+}
+
+.title {
+    margin-left: 6px;
+}
+.card{
+    margin-top: 30px;
+}
+.card-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: 22px;
+
+}
+#navbarSupportedContent{
+    justify-content: end;
+}
+.wholeNav{
+    padding: 0px 10px;
+}
+.navbar-brand{
+    margin-left: 15px;
+}

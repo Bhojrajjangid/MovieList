@@ -1,0 +1,49 @@
+<div class="NavBarTop">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Movie List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <span class="sr-only"></span>
+            </li>
+            
+          </ul>
+          <div style="display: flex">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText" (input)="textChange($event)">
+            <button  style="margin-left: 10px;" class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="onInputChange()">Search</button>
+          </div>
+          <button  style="margin-left: 10px; margin-right: 15px;" class="btn btn-outline-success my-2 my-sm-0" (click)="logout()"  type="submit">Logout</button>
+
+        </div>
+      </nav>
+</div>
+<div *ngIf="!noMovies" class="container">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let movies of tempMoviesData">
+            <div class="card" (click)="openVerticallyCentered(movies)">
+                <div class="both">
+                    <div class="initialsDiv">
+                        {{returntext(movies.title)}}
+                    </div>
+                    <div class="title">
+                        <h5 class="card-title">{{movies.title}}</h5>
+                    </div>
+                </div>
+
+
+
+                <div class="card-body">
+                    <p class="card-text">{{movies.description}}</p>
+                    <p class="card-test">{{movies.genres}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="noMovies" style="margin: 25px">
+    <h1>Sorry!! Currently there are no movies.</h1>
+</div>

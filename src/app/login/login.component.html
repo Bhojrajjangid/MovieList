@@ -1,0 +1,56 @@
+<!-- <div class="container">
+    <div class="card-body">
+        <form [formGroup]="userLoginForm">
+            <div class="row">
+                <input type="text" class="form-control" placeholder="Enter your emailId" aria-label="email"
+                    aria-describedby="basic-addon1" formControlName="email" />
+                <input type="password" class="form-control" placeholder="Enter your password" aria-label="password"
+                    aria-describedby="basic-addon1" formControlName="password" />
+            </div>
+            <button type="button" class="btn btn-primary" [disabled]="!userLoginForm.valid"
+                (click)="goToLogin(userLoginForm)">Login</button>
+        </form>
+    </div>
+</div> -->
+
+<div class="container">
+    <form [formGroup]="userLoginForm">
+        <div class="login-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>User name</label>
+                        <input type="text" class="form-control" placeholder="Enter your username" aria-label="email"
+                            aria-describedby="basic-addon1" formControlName="username">
+                        <div class="help-block m-0" *ngIf="(f.username.touched || f.username.dirty)">
+                            <div class="error" *ngIf="f.username.errors?.required">
+                                UserName is Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your password"
+                            aria-label="password" aria-describedby="basic-addon1" formControlName="password">
+                        <div class="help-block m-0" *ngIf="(f.password.touched || f.password.dirty)">
+                            <div class="error" *ngIf="f.password.errors?.required">
+                                Password is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="loginBtn">
+                        <button type="button" class="btn btn-primary" [disabled]="!userLoginForm.valid"
+                            (click)="goToLogin(userLoginForm)">Login</button>
+                    </div>
+                    <div *ngIf="loginFail" class="loginAlert alert alert-danger" role="alert">
+                        Incorrect Login Credentials!!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
