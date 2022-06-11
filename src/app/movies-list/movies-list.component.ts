@@ -1,5 +1,5 @@
 import { r3JitTypeSourceSpan } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MoviemodalComponent } from '../moviemodal/moviemodal.component';
@@ -17,41 +17,54 @@ export class MoviesListComponent implements OnInit {
   searchText: any = '';
   noMovies: any = false;
   constructor(public movieService: LoginService, private modalService: NgbModal,
-    public router:Router) {
+    public router: Router) {
     this.userName = localStorage.getItem('userName')
     console.log('Movie page token is :', localStorage.getItem('userToken'))
-    this.movieData = [{
-      title: 'Ra one',
-      description: 'a description of the movie',
-      genres: 'a comma separated list of genres,'
-    }, {
-      title: 'Mission impossible',
-      description: 'a description of the movie',
-      genres: 'a comma separated list of genres,'
-    }, {
-      title: 'spiderman',
-      description: 'a description of the movie',
-      genres: 'a comma separated list of genres,'
-    }, {
-      title: 'night at the museum',
-      description: 'a description of the movie',
-      genres: 'a comma separated list of genres,'
-    }, {
-      title: 'one',
-      description: 'a description of the movie',
-      genres: 'a comma separated list of genres,'
-    }];
+    // this.movieData = [{
+    //   title: 'Ra one',
+    //   description: 'a description of the movie',
+    //   genres: 'a comma separated list of genres,'
+    // }, {
+    //   title: 'Mission impossible',
+    //   description: 'a description of the movie',
+    //   genres: 'a comma separated list of genres,'
+    // }, {
+    //   title: 'spiderman',
+    //   description: 'a description of the movie',
+    //   genres: 'a comma separated list of genres,'
+    // }, {
+    //   title: 'night at the museum',
+    //   description: 'a description of the movie',
+    //   genres: 'a comma separated list of genres,'
+    // }, {
+    //   title: 'one',
+    //   description: 'a description of the movie',
+    //   genres: 'a comma separated list of genres,'
+    // }];
 
+    // this.tempMoviesData = this.movieData;
+    // if (this.tempMoviesData.length == 0) {
+    //   this.noMovies = true;
+    // }
+  }
+
+  ngOnInit(): void {
+    // this.movieService.getMovies(localStorage.getItem('userToken')).subscribe((movieData: any) => {
+    //   console.log(movieData.JSON)
+    //   this.movieData = movieData.Search;
+    // }, error => { console.log(error) });
+    // this.tempMoviesData = this.movieData;
+    // if (this.tempMoviesData.length == 0) {
+    //   this.noMovies = true;
+    // }
+    fetch('http://www.omdbapi.com/https://www.omdbapi.com/?apikey=da8804af&s=batman')
+    .then((response:any)=>{response.json();
+    console.log('the data is ',response)
+  }).then((res:any)=>{this.movieData = res.Search});
     this.tempMoviesData = this.movieData;
     if (this.tempMoviesData.length == 0) {
       this.noMovies = true;
     }
-  }
-
-  ngOnInit(): void {
-    // this.movieService.getMovies(localStorage.getItem('userToken')).subscribe((movieData:any)=>{
-    //   console.log(movieData.JSON)
-    // },error=>{console.log(error)})
   }
   returntext(text: any) {
     let initials = "";
@@ -78,10 +91,10 @@ export class MoviesListComponent implements OnInit {
       this.tempMoviesData = this.movieData;
     }
     else {
-    this.tempMoviesData = [];
+      this.tempMoviesData = [];
 
       this.movieData.forEach(ele => {
-        if (ele.title.toLowerCase().includes(this.searchText.toLowerCase())) {
+        if (ele.Title.toLowerCase().includes(this.searchText.toLowerCase())) {
           this.tempMoviesData.push(ele)
         }
       })
@@ -90,13 +103,13 @@ export class MoviesListComponent implements OnInit {
       }
     }
   }
-  textChange(evetn:any){
-    if(evetn.target.value == ''){
+  textChange(evetn: any) {
+    if (evetn.target.value == '') {
       this.noMovies = false;
       this.tempMoviesData = this.movieData;
     }
   }
-  logout(){
+  logout() {
     localStorage.removeItem('userToken');
     this.router.navigate(['/login']);
   }
